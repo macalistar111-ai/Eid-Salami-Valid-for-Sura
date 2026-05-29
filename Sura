@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Salami Mystery Box 🎁</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffd6ed 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Floating Elements CSS */
+        .bg-element {
+            position: absolute;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: rgba(231, 76, 116, 0.12); /* হালকা গোলাপি টোন */
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+            animation: floatAround 12s linear infinite;
+        }
+
+        @keyframes floatAround {
+            0% { transform: translateY(105vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) translateX(50px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Top Banner - Main Animation */
+        .love-banner {
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #d6336c;
+            text-align: center;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(231, 76, 116, 0.1);
+            border: 1.5px solid #ffb6d9;
+            z-index: 10;
+            animation: pulseGlow 2s infinite ease-in-out;
+            max-width: 410px;
+            width: 90%;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(231, 76, 116, 0.1); }
+            50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(231, 76, 116, 0.25); }
+            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(231, 76, 116, 0.1); }
+        }
+
+        /* Main Container */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(231, 76, 116, 0.15);
+            padding: 30px 20px;
+            max-width: 450px;
+            width: 100%;
+            border: 2px solid #ffb6d9;
+            text-align: center;
+            z-index: 10;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            color: #d6336c;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #868e96;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .intro {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #495057;
+            margin-bottom: 25px;
+        }
+
+        /* Gift Box Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .gift-card {
+            background: #fff5f8;
+            border: 2px dashed #ffa3cf;
+            border-radius: 15px;
+            padding: 20px 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+        }
+
+        .gift-card:hover {
+            transform: scale(1.05);
+            background: #ffe3ee;
+        }
+
+        .gift-icon {
+            font-size: 2.5rem;
+        }
+
+        .gift-card.opened {
+            background: #ffffff;
+            border: 2px solid #d6336c;
+            animation: flipIn 0.5s ease forwards;
+        }
+
+        .gift-content {
+            display: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #d6336c;
+            line-height: 1.4;
+        }
+
+        @keyframes flipIn {
+            0% { transform: perspective(400px) rotateY(90deg); opacity: 0; }
+            100% { transform: perspective(400px) rotateY(0deg); opacity: 1; }
+        }
+
+        /* Final Selection Section */
+        .final-section {
+            display: none;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed #ffd6ed;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .final-section label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 50px;
+            border: 2px solid #ffa3cf;
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            color: #333;
+            background-color: #fff5f8;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-lock {
+            background: #d6336c;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(214, 51, 108, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .btn-lock:hover {
+            background: #b82154;
+        }
+
+        .success-screen {
+            display: none;
+            font-size: 1.1rem;
+            color: #d6336c;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Background Floating Container -->
+    <div id="bgContainer"></div>
+
+    <!-- Animated Love Banner at Top -->
+    <div class="love-banner">
+        I LOVE YOU SURA JAN❤️ <br>
+        <span style="font-size: 0.95rem; font-weight: normal; color: #e74c3c;">[ Shafiul ❤️ Sura ]</span>
+    </div>
+
+    <!-- Main Card Container -->
+    <div class="container" id="mainContainer">
+        <h1>🎁 MYSTERY SALAMI BOX</h1>
+        <div class="subtitle">Only for the Queen of My Heart ❤️</div>
+        
+        <p class="intro">জান, তোমার শাফিউল তোমার জন্য ৪টি রহস্যময় গিফট বক্স পাঠিয়েছে। প্রতিটি বক্সে একটা করে দারুণ সারপ্রাইজ আছে। <b>সবগুলো বক্স টাচ করে ওপেন করো</b>, তারপর নিজের পছন্দের সেরা সালামিটি ফাইনাল করো! ✨</p>
+        
+        <div class="grid-container">
+            <!-- Box 1 -->
+            <div class="gift-card" id="box1" onclick="openBox(1)">
+                <div class="gift-icon" id="icon1">🎁</div>
+                <div class="gift-content" id="content1">💍 অপশন A<br><span style="font-weight:normal; color:#555;">একটি কিউট রূপার আংটি</span></div>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="gift-card" id="box2" onclick="openBox(2)">
+                <div class="gift-icon" id="icon2">🎁</div>
+                <div class="gift-content" id="content2">🍦 অপশন B<br><span style="font-weight:normal; color:#555;">রোমান্টিক ডেট + ফুচকা-আইসক্রিম</span></div>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="gift-card" id="box3" onclick="openBox(3)">
+                <div class="gift-icon" id="icon3">🎁</div>
+                <div class="gift-content" id="content3">🍫 অপশন C<br><span style="font-weight:normal; color:#555;">৫০০ টাকা ক্যাশ + চকোলেট বক্স</span></div>
+            </div>
+
+            <!-- Box 4 -->
+            <div class="gift-card" id="box4" onclick="openBox(4)">
+                <div class="gift-icon" id="icon4">🎁</div>
+                <div class="gift-content" id="content4">🌹 অপশন D<br><span style="font-weight:normal; color:#555;">প্রেমের চিঠি + ব্ল্যাক মেটাল রিং</span></div>
+            </div>
+        </div>
+
+        <!-- Final Selection -->
+        <div class="final-section" id="finalSection">
+            <label for="salamiSelect">💝 এবার তোমার পছন্দের সেরা সালামিটি ফাইনাল করো:</label>
+            <select id="salamiSelect">
+                <option value="" disabled selected>--- একটি অপশন বেছে নাও ---</option>
+                <option value="অপশন A (কিউট রূপার আংটি)">💍 অপশন A (The Forever Memory)</option>
+                <option value="অপশন B (রোমান্টিক ডেট)">🍦 অপশন B (The Romantic Date)</option>
+                <option value="অপশন C (ক্যাশ সালামি ও চকোলেট)">💵 অপশন C (The Sweet Surprise)</option>
+                <option value="অপশন D (প্রেমের চিঠি ও মেটাল রিং)">🌹 অপশন D (The Heartbeat Pack)</option>
+            </select>
+            <button class="btn-lock" onclick="lockSalami()">সালামি লক করো! 🔐</button>
+        </div>
+    </div>
+
+    <!-- Success Screen (Initially Hidden) -->
+    <div class="container" id="successScreen" style="display: none;">
+        💝 পারফেক্ট চয়েস জান!<br><br>
+        তুমি সফলভাবে <span id="finalChoice" style="color: #333; background: #ffe3ee; padding: 2px 10px; border-radius: 5px;"></span> লক করেছ।<br><br>
+        <span style="font-size: 0.95rem; color: #555; font-weight: normal;">
+        [ মনের মিষ্টি শর্ত: আমাদের দেখা হওয়ার দিন এই সালামি বুঝে পাওয়ার পর, আমাকে দুনিয়ার সবচেয়ে সুন্দর লাজুক হাসিটা গিফট করতে হবে। 😊 ]
+        </span><br><br>
+        তোমার শাফিউল 👑
+    </div>
+
+    <script>
+        let openedBoxes = new Set();
+
+        // JavaScript to automatically generate floating background elements
+        const words = ['SURA', 'SHAFIUL', 'LOVE ❤️', 'SURA ❤️', 'SHAFIUL ❤️'];
+        const bgContainer = document.getElementById('bgContainer');
+
+        function createFloatingText() {
+            const el = document.createElement('div');
+            el.className = 'bg-element';
+            el.innerText = words[Math.floor(Math.random() * words.length)];
+            
+            // Random styling for floating effect
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.animationDuration = (Math.random() * 5 + 8) + 's'; // Between 8s and 13s
+            el.style.fontSize = (Math.random() * 0.4 + 0.8) + 'rem'; // Random size
+            
+            bgContainer.appendChild(el);
+
+            // Remove elements after animation ends
+            setTimeout(() => {
+                el.remove();
+            }, 13000);
+        }
+
+        // Generate elements continuously
+        setInterval(createFloatingText, 600);
+
+        function openBox(boxId) {
+            const card = document.getElementById(`box${boxId}`);
+            const icon = document.getElementById(`icon${boxId}`);
+            const content = document.getElementById(`content${boxId}`);
+
+            if (!openedBoxes.has(boxId)) {
+                icon.style.display = 'none';
+                content.style.display = 'block';
+                card.classList.add('opened');
+                openedBoxes.add(boxId);
+            }
+
+            if (openedBoxes.size === 4) {
+                document.getElementById('finalSection').style.display = 'block';
+            }
+        }
+
+        function lockSalami() {
+            const selectElement = document.getElementById('salamiSelect');
+            const selectedValue = selectElement.value;
+
+            if (selectedValue === "") {
+                alert("জান! আগে ড্রপডাউন থেকে যেকোনো একটা অপশন সিলেক্ট করো। 😉");
+                return;
+            }
+
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
+            document.getElementById('finalChoice').innerText = selectedValue;
+        }
+    </script>
+</body>
+</html>
