@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eid Salami Mystery Box 🎁</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
 
         body {
             font-family: 'Hind Siliguri', 'Poppins', sans-serif;
@@ -13,78 +13,79 @@
             margin: 0;
             padding: 20px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             color: #333;
-            position: relative;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Background Floating Elements CSS */
-        .bg-element {
-            position: absolute;
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-            font-size: 0.85rem;
-            color: rgba(231, 76, 116, 0.12); /* হালকা গোলাপি টোন */
-            pointer-events: none;
-            user-select: none;
-            white-space: nowrap;
-            animation: floatAround 12s linear infinite;
-        }
-
-        @keyframes floatAround {
-            0% { transform: translateY(105vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) translateX(50px) rotate(360deg); opacity: 0; }
-        }
-
-        /* Top Banner - Main Animation */
-        .love-banner {
-            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+        /* Background Floating Text Engine */
+        .bouncing-text {
+            position: fixed;
             font-weight: 700;
+            font-size: 1.5rem;
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            padding: 5px 10px;
+            border-radius: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .sparkle-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 2;
             font-size: 1.2rem;
-            color: #d6336c;
-            text-align: center;
-            margin-bottom: 25px;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 12px 20px;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(231, 76, 116, 0.1);
-            border: 1.5px solid #ffb6d9;
-            z-index: 10;
-            animation: pulseGlow 2s infinite ease-in-out;
-            max-width: 410px;
-            width: 90%;
+            animation: particleFade 1s ease-out forwards;
         }
 
-        @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(231, 76, 116, 0.1); }
-            50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(231, 76, 116, 0.25); }
-            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(231, 76, 116, 0.1); }
+        @keyframes particleFade {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--mx), var(--my)) scale(0.5); opacity: 0; }
         }
 
-        /* Main Container */
+        /* Main Container setup */
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(5px);
             border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(231, 76, 116, 0.15);
+            box-shadow: 0 15px 35px rgba(231, 76, 116, 0.2);
             padding: 30px 20px;
             max-width: 450px;
             width: 100%;
             border: 2px solid #ffb6d9;
             text-align: center;
+            position: relative;
             z-index: 10;
-            box-sizing: border-box;
+        }
+
+        /* Top Banner Animation */
+        .love-banner {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #d6336c;
+            margin-bottom: 15px;
+            background: #fff0f6;
+            padding: 12px;
+            border-radius: 50px;
+            border: 1px solid #ffa3cf;
+            animation: pulseGlow 2s infinite ease-in-out;
+            text-shadow: 0 0 10px rgba(214, 51, 108, 0.2);
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); box-shadow: 0 0 5px rgba(214, 51, 108, 0.2); }
+            50% { transform: scale(1.03); box-shadow: 0 0 20px rgba(214, 51, 108, 0.4); }
+            100% { transform: scale(1); box-shadow: 0 0 5px rgba(214, 51, 108, 0.2); }
         }
 
         h1 {
-            font-size: 1.6rem;
-            color: #d6336c;
-            margin-top: 5px;
+            font-size: 1.5rem;
+            color: #c2255c;
             margin-bottom: 5px;
         }
 
@@ -199,6 +200,7 @@
 
         .btn-lock:hover {
             background: #b82154;
+            box-shadow: 0 7px 20px rgba(214, 51, 108, 0.4);
         }
 
         .success-screen {
@@ -206,6 +208,7 @@
             font-size: 1.1rem;
             color: #d6336c;
             font-weight: 600;
+            animation: fadeIn 0.5s ease-in-out;
             line-height: 1.6;
         }
 
@@ -217,49 +220,37 @@
 </head>
 <body>
 
-    <!-- Dynamic Background Floating Container -->
-    <div id="bgContainer"></div>
-
-    <!-- Animated Love Banner at Top -->
-    <div class="love-banner">
-        I LOVE YOU SURA JAN❤️ <br>
-        <span style="font-size: 0.95rem; font-weight: normal; color: #e74c3c;">[ Shafiul ❤️ Sura ]</span>
-    </div>
-
-    <!-- Main Card Container -->
     <div class="container" id="mainContainer">
+        <!-- Awesome Glowing Top Banner -->
+        <div class="love-banner">I LOVE YOU SURA JAN❤️<br>[ Shafi ❤️ Sura ]</div>
+
         <h1>🎁 MYSTERY SALAMI BOX</h1>
         <div class="subtitle">Only for the Queen of My Heart ❤️</div>
         
         <p class="intro">জান, তোমার শাফিউল তোমার জন্য ৪টি রহস্যময় গিফট বক্স পাঠিয়েছে। প্রতিটি বক্সে একটা করে দারুণ সারপ্রাইজ আছে। <b>সবগুলো বক্স টাচ করে ওপেন করো</b>, তারপর নিজের পছন্দের সেরা সালামিটি ফাইনাল করো! ✨</p>
         
         <div class="grid-container">
-            <!-- Box 1 -->
             <div class="gift-card" id="box1" onclick="openBox(1)">
                 <div class="gift-icon" id="icon1">🎁</div>
                 <div class="gift-content" id="content1">💍 অপশন A<br><span style="font-weight:normal; color:#555;">একটি কিউট রূপার আংটি</span></div>
             </div>
 
-            <!-- Box 2 -->
             <div class="gift-card" id="box2" onclick="openBox(2)">
                 <div class="gift-icon" id="icon2">🎁</div>
                 <div class="gift-content" id="content2">🍦 অপশন B<br><span style="font-weight:normal; color:#555;">রোমান্টিক ডেট + ফুচকা-আইসক্রিম</span></div>
             </div>
 
-            <!-- Box 3 -->
             <div class="gift-card" id="box3" onclick="openBox(3)">
                 <div class="gift-icon" id="icon3">🎁</div>
                 <div class="gift-content" id="content3">🍫 অপশন C<br><span style="font-weight:normal; color:#555;">৫০০ টাকা ক্যাশ + চকোলেট বক্স</span></div>
             </div>
 
-            <!-- Box 4 -->
             <div class="gift-card" id="box4" onclick="openBox(4)">
                 <div class="gift-icon" id="icon4">🎁</div>
                 <div class="gift-content" id="content4">🌹 অপশন D<br><span style="font-weight:normal; color:#555;">প্রেমের চিঠি + ব্ল্যাক মেটাল রিং</span></div>
             </div>
         </div>
 
-        <!-- Final Selection -->
         <div class="final-section" id="finalSection">
             <label for="salamiSelect">💝 এবার তোমার পছন্দের সেরা সালামিটি ফাইনাল করো:</label>
             <select id="salamiSelect">
@@ -273,8 +264,8 @@
         </div>
     </div>
 
-    <!-- Success Screen (Initially Hidden) -->
     <div class="container" id="successScreen" style="display: none;">
+        <div class="love-banner">I LOVE YOU SURA JAN❤️</div>
         💝 পারফেক্ট চয়েস জান!<br><br>
         তুমি সফলভাবে <span id="finalChoice" style="color: #333; background: #ffe3ee; padding: 2px 10px; border-radius: 5px;"></span> লক করেছ।<br><br>
         <span style="font-size: 0.95rem; color: #555; font-weight: normal;">
@@ -283,33 +274,106 @@
         তোমার শাফিউল 👑
     </div>
 
+    <!-- Background Animation Bouncing Script -->
     <script>
-        let openedBoxes = new Set();
+        const words = ["SURA", "SHAFI", "SURA", "SHAFI"];
+        const colors = ["#d6336c", "#9c27b0", "#e91e63", "#673ab7", "#ff4081"];
+        const sparks = ["LOVE", "💜", "JAN", "❤️", "HEART"];
+        
+        const bouncingElements = [];
+        const numElements = words.length;
 
-        // JavaScript to automatically generate floating background elements
-        const words = ['SURA', 'SHAFIUL', 'LOVE ❤️', 'SURA ❤️', 'SHAFIUL ❤️'];
-        const bgContainer = document.getElementById('bgContainer');
-
-        function createFloatingText() {
+        // Initialize bouncing texts
+        for (let i = 0; i < numElements; i++) {
             const el = document.createElement('div');
-            el.className = 'bg-element';
-            el.innerText = words[Math.floor(Math.random() * words.length)];
-            
-            // Random styling for floating effect
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.animationDuration = (Math.random() * 5 + 8) + 's'; // Between 8s and 13s
-            el.style.fontSize = (Math.random() * 0.4 + 0.8) + 'rem'; // Random size
-            
-            bgContainer.appendChild(el);
+            el.className = 'bouncing-text';
+            el.innerText = words[i];
+            el.style.color = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(el);
 
-            // Remove elements after animation ends
-            setTimeout(() => {
-                el.remove();
-            }, 13000);
+            // Random positioning and vectors
+            bouncingElements.push({
+                element: el,
+                x: Math.random() * (window.innerWidth - 150),
+                y: Math.random() * (window.innerHeight - 50),
+                dx: (Math.random() > 0.5 ? 2 : -2) * (Math.random() * 1.5 + 1),
+                dy: (Math.random() > 0.5 ? 2 : -2) * (Math.random() * 1.5 + 1),
+                width: 100,
+                height: 40
+            });
         }
 
-        // Generate elements continuously
-        setInterval(createFloatingText, 600);
+        function updateAnimation() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            bouncingElements.forEach((item) => {
+                item.x += item.dx;
+                item.y += item.dy;
+
+                let bounced = false;
+
+                // Wall collisions X
+                if (item.x <= 0) {
+                    item.x = 0;
+                    item.dx = -item.dx;
+                    bounced = true;
+                } else if (item.x + item.width >= width) {
+                    item.x = width - item.width;
+                    item.dx = -item.dx;
+                    bounced = true;
+                }
+
+                // Wall collisions Y
+                if (item.y <= 0) {
+                    item.y = 0;
+                    item.dy = -item.dy;
+                    bounced = true;
+                } else if (item.y + item.height >= height) {
+                    item.y = height - item.height;
+                    item.dy = -item.dy;
+                    bounced = true;
+                }
+
+                // Apply position
+                item.element.style.left = item.x + 'px';
+                item.element.style.top = item.y + 'px';
+
+                // Trigger spark on bounce
+                if (bounced) {
+                    createSparkle(item.x + item.width/2, item.y + item.height/2);
+                    // Change color dynamically on bounce
+                    item.element.style.color = colors[Math.floor(Math.random() * colors.length)];
+                }
+            });
+
+            requestAnimationFrame(updateAnimation);
+        }
+
+        function createSparkle(x, y) {
+            for (let i = 0; i < 3; i++) {
+                const p = document.createElement('div');
+                p.className = 'sparkle-particle';
+                p.innerText = sparks[Math.floor(Math.random() * sparks.length)];
+                p.style.left = x + 'px';
+                p.style.top = y + 'px';
+                
+                // Random explosion direction
+                const mx = (Math.random() - 0.5) * 100 + 'px';
+                const my = (Math.random() - 0.5) * 100 + 'px';
+                p.style.setProperty('--mx', mx);
+                p.style.setProperty('--my', my);
+
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1000);
+            }
+        }
+
+        // Start animation loop
+        requestAnimationFrame(updateAnimation);
+
+        // Core App Logic
+        let openedBoxes = new Set();
 
         function openBox(boxId) {
             const card = document.getElementById(`box${boxId}`);
@@ -321,6 +385,11 @@
                 content.style.display = 'block';
                 card.classList.add('opened');
                 openedBoxes.add(boxId);
+                
+                // Extra sparkles on unboxing
+                for(let i=0; i<5; i++) {
+                    createSparkle(window.innerWidth/2, window.innerHeight/2);
+                }
             }
 
             if (openedBoxes.size === 4) {
@@ -343,4 +412,4 @@
         }
     </script>
 </body>
-</html>
+                                                                        </html>
